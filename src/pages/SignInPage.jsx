@@ -10,9 +10,9 @@ import {
   Title,
   AuthContent,
   Input,
-} from "../assets/styles/sharedStyles";
+} from "../assets/styles/authStyles";
 
-export default function SignIpPage() {
+export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState(null);
   const [signInData, setSignInData] = useState({

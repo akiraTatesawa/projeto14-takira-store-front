@@ -10,7 +10,7 @@ import {
   Title,
   AuthContent,
   Input,
-} from "../assets/styles/sharedStyles";
+} from "../assets/styles/authStyles";
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);

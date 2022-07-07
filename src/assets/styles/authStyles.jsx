@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-// Used in sign in and sing up
+// Used in sign in and sign up
 export const AuthContainer = styled.main`
   height: 100%;
   width: 100%;

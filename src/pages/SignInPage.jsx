@@ -12,14 +12,12 @@ import {
   Input,
 } from "../assets/styles/sharedStyles";
 
-export default function SignUpPage() {
+export default function SignIpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState(null);
-  const [signUpData, setSignUpData] = useState({
-    name: "",
+  const [signInData, setSignInData] = useState({
     email: "",
     password: "",
-    passwordConfirmation: "",
   });
 
   const navigate = useNavigate();
@@ -28,18 +26,16 @@ export default function SignUpPage() {
     const { status } = err.response;
 
     console.log(err.response);
-    setSignUpData({
-      ...signUpData,
-      name: "",
+    setSignInData({
+      ...signInData,
       email: "",
       password: "",
-      passwordConfirmation: "",
     });
 
     if (status === 422) {
       setErrorText("Preencha os campos corretamente!");
     } else {
-      setErrorText("Houve um erro ao realizar o cadastro, tente novamente");
+      setErrorText("Houve um erro ao realizar o login, tente novamente");
     }
 
     setIsLoading(false);
@@ -47,36 +43,30 @@ export default function SignUpPage() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setSignUpData({ ...signUpData, [name]: value });
+    setSignInData({ ...signInData, [name]: value });
     setErrorText(null);
   }
 
   function submitUserData(e) {
-    const URL = "http://localhost:5000/sign-up";
+    const URL = "http://localhost:5000/sign-in";
     e.preventDefault();
     setIsLoading(true);
 
-    const promise = axios.post(URL, signUpData);
+    const promise = axios.post(URL, signInData);
 
     promise
-      .then(() => {
-        navigate("/");
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
       })
       .catch(handleError);
-  }
-
-  function renderWarning() {
-    if (signUpData.password !== signUpData.passwordConfirmation) {
-      return <WarningText>As senhas devem ser idênticas</WarningText>;
-    }
-    return null;
   }
 
   function renderButtonContent() {
     if (isLoading) {
       return <ThreeDots color="#FFFFFF" />;
     }
-    return "Cadastrar";
+    return "Entrar";
   }
 
   function renderSubmitErrorText() {
@@ -86,7 +76,6 @@ export default function SignUpPage() {
     return null;
   }
 
-  const warningText = renderWarning();
   const submitErrorText = renderSubmitErrorText();
   const buttonContent = renderButtonContent();
 
@@ -97,20 +86,10 @@ export default function SignUpPage() {
 
         <form onSubmit={(e) => submitUserData(e)}>
           <Input
-            type="text"
-            placeholder="Nome"
-            name="name"
-            value={signUpData.name}
-            maxLength={20}
-            required
-            disabled={isLoading}
-            onChange={(e) => handleChange(e)}
-          />
-          <Input
             type="email"
             placeholder="Email"
             name="email"
-            value={signUpData.email}
+            value={signInData.email}
             maxLength={30}
             required
             disabled={isLoading}
@@ -120,36 +99,19 @@ export default function SignUpPage() {
             type="password"
             placeholder="Senha"
             name="password"
-            value={signUpData.password}
-            required
-            disabled={isLoading}
-            onChange={(e) => handleChange(e)}
-          />
-          <Input
-            type="password"
-            placeholder="Confirmar senha"
-            name="passwordConfirmation"
-            value={signUpData.passwordConfirmation}
+            value={signInData.password}
             required
             disabled={isLoading}
             onChange={(e) => handleChange(e)}
           />
 
           {submitErrorText}
-          {warningText}
 
-          <SubmitButton
-            disabled={
-              isLoading ||
-              signUpData.password !== signUpData.passwordConfirmation
-            }
-          >
-            {buttonContent}
-          </SubmitButton>
+          <SubmitButton disabled={isLoading}>{buttonContent}</SubmitButton>
         </form>
 
-        <Link to="/">
-          <span>Já possui uma conta? Faça login!</span>
+        <Link to="/sign-up">
+          <span>Não tem uma conta? Cadastre-se já!</span>
         </Link>
       </AuthContent>
     </AuthContainer>

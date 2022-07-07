@@ -12,6 +12,9 @@ export const AuthContainer = styled.main`
 `;
 
 export const SubmitButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 350px;
   height: 2em;
@@ -24,4 +27,12 @@ export const SubmitButton = styled.button`
   border-radius: 5px;
   border: none;
   margin-top: 1.2em;
+`;
+
+export const WarningText = styled.span`
+  color: var(--text-warning);
+  font-size: 0.95em;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 0.5em;
 `;

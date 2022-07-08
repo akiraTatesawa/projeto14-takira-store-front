@@ -1,24 +1,19 @@
+/* eslint no-underscore-dangle: 0 */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsLaptop } from "react-icons/bs";
 
 import {
-  SliderContainer,
+  Slider,
   Category,
-  Icon,
+  Circle,
   Name,
 } from "../assets/styles/categoriesSliderStyles";
 
 export default function CategoriesSlider() {
-  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   },
-  // };
+  const navigate = useNavigate();
 
   function handleError(err) {
     const { status } = err.response;
@@ -34,7 +29,6 @@ export default function CategoriesSlider() {
 
   useEffect(() => {
     const URL = "http://localhost:5000/categories";
-    // const promise = axios.get(URL, config);
     const promise = axios.get(URL);
 
     promise
@@ -44,18 +38,27 @@ export default function CategoriesSlider() {
       .catch(handleError);
   }, []);
 
-  return (
-    <SliderContainer>
-      {categories.length > 0
-        ? categories.map((category) => (
-            <Category key={category.id}>
-              <Icon onClick={() => navigate(`/products/${category.icon}`)}>
-                <BsLaptop size={30} style={{ color: "#fff" }} />
-              </Icon>
-              <Name>{category.name}</Name>
-            </Category>
-          ))
-        : null}
-    </SliderContainer>
-  );
+  function handleOnClick(category) {
+    navigate(`/categories/${category._id}`, {
+      state: { categoryName: category.name },
+    });
+  }
+
+  function renderCategories() {
+    if (categories) {
+      return categories.map((category) => (
+        <Category key={category._id}>
+          <Circle onClick={() => handleOnClick(category)}>
+            <BsLaptop size={30} style={{ color: "#fff" }} />
+          </Circle>
+          <Name>{category.name}</Name>
+        </Category>
+      ));
+    }
+    return null;
+  }
+
+  const categoriesContent = renderCategories();
+
+  return <Slider>{categoriesContent}</Slider>;
 }

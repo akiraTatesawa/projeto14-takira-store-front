@@ -3,7 +3,7 @@ import { SubmitButton } from "./authStyles";
 
 export const MainContainer = styled.main`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   padding: 5.36em 1em 2em 1em;
 `;
 
@@ -36,6 +36,7 @@ export const ProductContainer = styled.div`
       width: 100%;
       aspect-ratio: 1.5;
       max-height: 280px;
+      object-fit: contain;
     }
 
     & figcaption {
@@ -43,6 +44,7 @@ export const ProductContainer = styled.div`
 
       & h2 {
         font-size: 1.29em;
+        line-height: 1.4em;
         font-weight: 600;
       }
 
@@ -56,7 +58,7 @@ export const ProductContainer = styled.div`
         margin-top: 1em;
         font-size: 1em;
         color: var(--text-sec);
-        line-height: 1.2em;
+        line-height: 1.5em;
         font-weight: 500;
       }
     }
@@ -76,6 +78,8 @@ export const AddToCartButton = styled(SubmitButton)`
 
 export const ProductOnStock = styled.span`
   font-size: 1em;
-  color: var(--text-sec);
+  text-align: center;
+  color: ${(props) => props.color};
   margin-top: 4em;
+  font-weight: 600;
 `;

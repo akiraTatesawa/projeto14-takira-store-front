@@ -49,15 +49,14 @@ export const GlobalStyle = createGlobalStyle`
     /* Global Styles */
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Righteous&display=swap');
-    /* font-family: 'Inter', sans-serif;
-    font-family: 'Righteous', cursive; */
 
     * {
         box-sizing: border-box;
     }
 
     *:focus {
-        outline: 2px solid var(--brand-sec);
+        outline: 2px solid var(--brand-hover);
+        outline-offset: 1px;
     }
 
     body {
@@ -70,6 +69,7 @@ export const GlobalStyle = createGlobalStyle`
         --text-sec: #71717A;
         --text-warning: #ECAB3F;
         --text-error: #D3524A;
+        --text-ok: #4CBD4E;
         --container-bg: #F4F4F5;
 
         background-color: #ffffff;

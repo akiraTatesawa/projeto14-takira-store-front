@@ -13,7 +13,7 @@ export default function OrderInfo({ username, total }) {
       </span>
       <TotalOrder>
         <strong>Total do pedido: </strong>
-        <span>{total || "R$ 999,99"}</span>
+        <span>{total}</span>
       </TotalOrder>
     </OrderInfoContainer>
   );

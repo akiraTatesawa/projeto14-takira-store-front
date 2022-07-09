@@ -3,7 +3,10 @@ import { ThreeDots } from "react-loader-spinner";
 
 import { Button } from "../../assets/styles/checkoutPageStyles";
 
-export default function CheckoutSubmitButton({ isSubmittingPayment }) {
+export default function CheckoutSubmitButton({
+  isSubmittingPayment,
+  setIsSubmittingPayment,
+}) {
   function renderButtonContent() {
     if (isSubmittingPayment) {
       return <ThreeDots color="#ffffff" />;
@@ -18,6 +21,7 @@ export default function CheckoutSubmitButton({ isSubmittingPayment }) {
       type="button"
       title="Finalizar compra"
       isLoading={isSubmittingPayment}
+      onClick={() => setIsSubmittingPayment(true)}
     >
       {buttonContent}
     </Button>

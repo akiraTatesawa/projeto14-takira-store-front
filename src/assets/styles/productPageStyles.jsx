@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SubmitButton } from "./authStyles";
 
 export const MainContainer = styled.main`
   width: 100%;
@@ -29,9 +28,9 @@ export const ProductContainer = styled.div`
     height: auto;
 
     & img {
-      padding: 10px;
-      background-color: var(--container-bg);
-      box-shadow: 0px 2px 5px #dedee6;
+      padding: 0.7em;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 5px 2px rgb(222 222 229);
       border-radius: 5px;
       width: 100%;
       aspect-ratio: 1.5;
@@ -48,8 +47,22 @@ export const ProductContainer = styled.div`
         font-weight: 600;
       }
 
+      & div {
+        margin-top: 1.5em;
+        height: 2.5em;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      & span {
+        font-weight: 600;
+        font-size: 1em;
+      }
+
       & h3 {
-        margin-top: 2em;
+        margin-top: 1.5em;
         font-size: 1.2em;
         font-weight: 600;
       }
@@ -65,21 +78,27 @@ export const ProductContainer = styled.div`
   }
 `;
 
-export const AddToCartButton = styled(SubmitButton)`
-  width: 80%;
-  max-width: 280px;
-  margin-top: 0;
-  margin-top: 0.7em;
-  min-height: 2.3em;
-  height: auto;
-  line-height: 1.4em;
-  padding: 9px;
-`;
-
 export const ProductOnStock = styled.span`
-  font-size: 1em;
   text-align: center;
   color: ${(props) => props.color};
-  margin-top: 4em;
   font-weight: 600;
+`;
+
+export const ProductDescription = styled.div`
+  max-width: 350px;
+  height: auto;
+
+  & h3 {
+    margin-top: 1.5em;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+  & p {
+    margin-top: 1em;
+    font-size: 1em;
+    color: var(--text-sec);
+    line-height: 1.5em;
+    font-weight: 500;
+  }
 `;

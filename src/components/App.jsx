@@ -10,6 +10,7 @@ import CartPage from "../pages/CartPage";
 
 import CategoryContext from "../contexts/CategoryContext";
 import CartContext from "../contexts/CartContext";
+import CheckoutPage from "../pages/CheckoutPage";
 
 function App() {
   const [categoryName, setCategoryName] = useState("");
@@ -27,6 +28,7 @@ function App() {
             <Route path="/categories/:categoryId" element={<CategoryPage />} />
             <Route path="/product/:productId" element={<ProductPage />} />
             <Route path="/shopping-cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </BrowserRouter>
       </CartContext.Provider>

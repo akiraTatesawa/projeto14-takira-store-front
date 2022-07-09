@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import {
   AuthContent,
   Input,
 } from "../assets/styles/authStyles";
+import { UserContext } from "../contexts/UserContext";
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,7 @@ export default function SignInPage() {
     email: "",
     password: "",
   });
+  const { setUserDatas } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -58,6 +60,7 @@ export default function SignInPage() {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("userDatas", JSON.stringify(res.data));
+        setUserDatas(res.data);
         navigate("/home");
       })
       .catch(handleError);

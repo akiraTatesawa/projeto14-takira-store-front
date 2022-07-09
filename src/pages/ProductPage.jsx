@@ -30,6 +30,7 @@ export default function ProductPage() {
       })
       .catch((err) => {
         console.log(err.response);
+        localStorage.removeItem("userDatas");
         navigate("/");
       });
   }

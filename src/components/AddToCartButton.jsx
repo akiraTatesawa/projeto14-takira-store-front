@@ -1,20 +1,24 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { SubmitButton } from "../assets/styles/authStyles";
 
+import { UserContext } from "../contexts/UserContext";
+
 export default function AddToCartButton({ productId, reloadProductInfo }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [requisitionStatus, setRequisitionStatus] = useState(null);
+  const { userDatas } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   function addProductToCart() {
     setIsAddingToCart(true);
-
     const URL = "http://localhost:5000/carts/add-product";
-    // provisory way to get a token
-    const { token } = JSON.parse(localStorage.getItem("userDatas"));
+    const { token } = userDatas;
 
     const config = {
       headers: {
@@ -31,6 +35,10 @@ export default function AddToCartButton({ productId, reloadProductInfo }) {
         reloadProductInfo();
       })
       .catch((err) => {
+        if (err.response.status === 401) {
+          localStorage.removeItem("userDatas");
+          navigate("/");
+        }
         setIsAddingToCart(false);
         setRequisitionStatus("error");
         console.log(err.response);

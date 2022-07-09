@@ -30,7 +30,7 @@ export const ItemInfos = styled.div`
 
   p {
     font-size: clamp(0.8em, 0.4em + 2vw, 1.2em);
-    font-weight: 600;
+    font-weight: 500;
     var(--text-primary);
   }
 `;
@@ -56,11 +56,24 @@ export const GeneralInfos = styled.div`
   }
 
   p {
-    font-size: clamp(0.8em, 0.3em + 2vw, 1.2em);
-    font-weight: 600;
+    font-size: clamp(0.8em, 0.4em + 2vw, 1.2em);
+    font-weight: 500;
     text-align: right;
-    color: var(--text-sec);
-    margin-bottom: 0.5em;
-    width: 50%;
+    var(--text-primary);
+    margin-left: 0.9em;
+  }
+`;
+
+export const Actions = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: clamp(0.8em, 0.4em + 2vw, 1.2em);
+    font-weight: 500;
+    var(--text-primary);
   }
 `;

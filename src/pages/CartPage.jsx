@@ -1,5 +1,5 @@
-/* eslint no-underscore-dangle: 0 */
 import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import NavBar from "../components/NavBar";
@@ -18,10 +18,12 @@ import CartContext from "../contexts/CartContext";
 
 export default function CartPage() {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const navigate = useNavigate();
 
+  const { token } = JSON.parse(localStorage.getItem("userDatas"));
   const config = {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -33,25 +35,24 @@ export default function CartPage() {
       .then((response) => {
         setCartItems(response.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        navigate("/");
       });
-  }, [cartItems]);
+  }, []);
 
   function renderItems() {
-    if (cartItems) {
+    if (cartItems.length > 0) {
       return cartItems.map((item) => <CartItem key={item._id} id={item._id} />);
     }
-    return null;
+    return <p>Não há itens no carrinho</p>;
   }
 
   function renderSubtotal() {
     if (cartItems) {
-      let total = 0;
-      cartItems.forEach((item) => {
-        total += item.price * item.quantity;
-      });
-      return total.toFixed(2).replace(".", ",");
+      return cartItems
+        .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+        .toFixed(2)
+        .replace(".", ",");
     }
     return null;
   }
@@ -69,7 +70,7 @@ export default function CartPage() {
         </CartContent>
         <Footer>
           <p>Subtotal = R$ {subtotal}</p>
-          <Button>Fechar Pedido</Button>
+          <Button disabled={cartItems.length === 0}>Fechar Pedido</Button>
         </Footer>
       </MainContainer>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import {
   Form,
@@ -6,12 +6,10 @@ import {
   FormSelectContainer,
 } from "../../assets/styles/checkoutPageStyles";
 
+import { CheckoutContext } from "../../contexts/CheckoutContext";
+
 export default function PaymentForm({ isSubmittingPayment }) {
-  const [paymentInfo, setPaymentInfo] = useState({
-    name: "",
-    creditCardNumber: "",
-    cvv: "",
-  });
+  const { paymentInfo, setPaymentInfo } = useContext(CheckoutContext);
 
   function creditCardMask(value) {
     let maskedValue = value;

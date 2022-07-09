@@ -70,7 +70,12 @@ export default function CartPage() {
         </CartContent>
         <Footer>
           <p>Subtotal = R$ {subtotal}</p>
-          <Button disabled={cartItems.length === 0}>Fechar Pedido</Button>
+          <Button
+            disabled={cartItems.length === 0}
+            onClick={() => navigate("/checkout")}
+          >
+            Fechar Pedido
+          </Button>
         </Footer>
       </MainContainer>
     </>

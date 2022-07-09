@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
@@ -8,6 +8,7 @@ import CategoryPage from "../pages/CategoryPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 
+import { UserContext } from "../contexts/UserContext";
 import CategoryContext from "../contexts/CategoryContext";
 import CartContext from "../contexts/CartContext";
 import CheckoutPage from "../pages/CheckoutPage";
@@ -16,11 +17,35 @@ function App() {
   const [categoryName, setCategoryName] = useState("");
   const [cartItems, setCartItems] = useState([]);
 
+  function searchUserDataLocalStorage() {
+    const userDataLocal = JSON.parse(localStorage.getItem("userDatas"));
+    if (userDataLocal) {
+      return userDataLocal;
+    }
+    return { name: "", token: "" };
+  }
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [userDatas, setUserDatas] = useState(searchUserDataLocalStorage);
+
+  useEffect(() => {
+    if (
+      userDatas.token.length !== 0 &&
+      (location.pathname === "/" || location.pathname === "/sign-up")
+    ) {
+      navigate("/home");
+    }
+    if (userDatas.token.length === 0 && location.pathname !== "/sign-up") {
+      navigate("/");
+    }
+  }, []);
+
   return (
-    /* eslint-disable-next-line react/jsx-no-constructed-context-values */
-    <CategoryContext.Provider value={{ categoryName, setCategoryName }}>
-      <CartContext.Provider value={{ cartItems, setCartItems }}>
-        <BrowserRouter>
+    <UserContext.Provider value={{ userDatas, setUserDatas }}>
+      <CategoryContext.Provider value={{ categoryName, setCategoryName }}>
+        <CartContext.Provider value={{ cartItems, setCartItems }}>
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
@@ -30,9 +55,9 @@ function App() {
             <Route path="/shopping-cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
-        </BrowserRouter>
-      </CartContext.Provider>
-    </CategoryContext.Provider>
+        </CartContext.Provider>
+      </CategoryContext.Provider>
+    </UserContext.Provider>
   );
 }
 

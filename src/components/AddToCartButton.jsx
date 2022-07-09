@@ -14,7 +14,7 @@ export default function AddToCartButton({ productId }) {
 
     const URL = "http://localhost:5000/carts/add-product";
     // provisory way to get a token
-    const { token } = JSON.parse(localStorage.getItem("token"));
+    const { token } = JSON.parse(localStorage.getItem("userDatas"));
 
     const config = {
       headers: {

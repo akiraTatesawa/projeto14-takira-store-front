@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";

@@ -57,7 +57,7 @@ export default function SignInPage() {
     promise
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userDatas", JSON.stringify(res.data));
         navigate("/home");
       })
       .catch(handleError);

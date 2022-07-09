@@ -6,17 +6,16 @@ export const MainContainer = styled.main`
   align-items: center;
   justify-content: center;
   padding: 2em 2.6em;
-  margin-top: 59px;
 `;
 
 export const HomeContent = styled.section`
   width: 100%;
-  height: 100%;
   max-width: 470px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 59px;
 `;
 
 export const SubTitle = styled.h2`

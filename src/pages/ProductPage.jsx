@@ -9,6 +9,7 @@ import {
   AddToCartButton,
   MainContainer,
   ProductContainer,
+  ProductDescription,
   ProductInfoSection,
   ProductOnStock,
 } from "../assets/styles/productPageStyles";
@@ -33,6 +34,22 @@ export default function ProductPage() {
       });
   }, []);
 
+  function renderProductStock() {
+    if (productData) {
+      const stock = productData.initialStock - productData.numberOfPurchases;
+      return (
+        <ProductOnStock
+          color={stock <= 5 ? "var(--text-error)" : "var(--text-ok)"}
+        >
+          Em estoque: {`${stock}`}
+        </ProductOnStock>
+      );
+    }
+    return null;
+  }
+
+  const productStock = renderProductStock();
+
   function renderProductFigure() {
     if (productData) {
       return (
@@ -44,8 +61,10 @@ export default function ProductPage() {
           />
           <figcaption>
             <h2>{productData.name}</h2>
-            <h3>Descrição</h3>
-            <p>{productData.description}</p>
+            <div>
+              <span>R$ {productData.price.toFixed(2).replace(".", ",")}</span>
+              {productStock}
+            </div>
           </figcaption>
         </figure>
       );
@@ -53,22 +72,21 @@ export default function ProductPage() {
     return null;
   }
 
-  function renderProductStock() {
+  const productInfo = renderProductFigure();
+
+  function renderProductDescription() {
     if (productData) {
-      const stock = productData.initialStock - productData.numberOfPurchases;
       return (
-        <ProductOnStock
-          color={stock <= 5 ? "var(--text-error)" : "var(--text-ok)"}
-        >
-          Quantidade disponível: {`${stock}`}
-        </ProductOnStock>
+        <ProductDescription>
+          <h3>Descrição</h3>
+          <p>{productData.description}</p>
+        </ProductDescription>
       );
     }
     return null;
   }
 
-  const productInfo = renderProductFigure();
-  const productStock = renderProductStock();
+  const productDescription = renderProductDescription();
 
   return (
     <>
@@ -77,8 +95,8 @@ export default function ProductPage() {
         <BackButton text="Voltar" />
         <ProductInfoSection>
           <ProductContainer>{productInfo}</ProductContainer>
-          {productStock}
           <AddToCartButton type="button">Adicionar ao carrinho</AddToCartButton>
+          {productDescription}
         </ProductInfoSection>
       </MainContainer>
     </>

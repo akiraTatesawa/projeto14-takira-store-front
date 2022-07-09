@@ -70,6 +70,7 @@ export const GlobalStyle = createGlobalStyle`
         --text-warning: #ECAB3F;
         --text-error: #D3524A;
         --text-ok: #4CBD4E;
+        --text-product-name: #676771;
         --container-bg: #F4F4F5;
 
         background-color: #ffffff;

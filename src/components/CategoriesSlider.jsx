@@ -1,8 +1,9 @@
-/* eslint no-underscore-dangle: 0 */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsLaptop } from "react-icons/bs";
+
+import CategoryContext from "../contexts/CategoryContext";
 
 import {
   Slider,
@@ -14,6 +15,7 @@ import {
 export default function CategoriesSlider() {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const { setCategoryName } = useContext(CategoryContext);
 
   function handleError(err) {
     const { status } = err.response;
@@ -39,9 +41,8 @@ export default function CategoriesSlider() {
   }, []);
 
   function handleOnClick(category) {
-    navigate(`/categories/${category._id}`, {
-      state: { categoryName: category.name },
-    });
+    setCategoryName(category.name);
+    navigate(`/categories/${category._id}`);
   }
 
   function renderCategories() {

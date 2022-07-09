@@ -19,7 +19,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     const URL = "http://localhost:5000/carts";
 
-    const { token } = JSON.parse(localStorage.getItem("token"));
+    const { token, name } = JSON.parse(localStorage.getItem("userDatas"));
 
     const config = {
       headers: {
@@ -30,7 +30,7 @@ export default function CheckoutPage() {
     const promise = axios.get(URL, config);
 
     promise
-      .then((res) => setCheckoutData(res.data))
+      .then((res) => setCheckoutData({ ...res.data, name }))
       .catch((err) => console.log(err.response));
   });
 
@@ -39,7 +39,10 @@ export default function CheckoutPage() {
       return (
         <CheckoutSection>
           <h2>Checkout</h2>
-          <OrderInfo total={checkoutData.total.toFixed(2).replace(".", ",")} />
+          <OrderInfo
+            total={checkoutData.total.toFixed(2).replace(".", ",")}
+            username={checkoutData.name}
+          />
           <PaymentForm isSubmittingPayment={isSubmitting} />
           <CheckoutSubmitButton
             isSubmittingPayment={isSubmitting}

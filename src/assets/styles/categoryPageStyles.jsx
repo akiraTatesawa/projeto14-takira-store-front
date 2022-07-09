@@ -6,7 +6,7 @@ export const MainContainer = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1em 2.6em;
+  padding: 2em 2.6em;
   margin-top: 59px;
 `;
 
@@ -23,7 +23,7 @@ export const SubTitle = styled.h2`
   width: 100%;
   text-align: start;
   font-size: 1.5em;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1.3em;
 `;
@@ -40,15 +40,15 @@ export const Product = styled.div`
   width: 48%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5em;
-  padding: 0.5em;
+  margin-bottom: 1em;
+  padding: 0.8em;
   border-radius: 5px;
-  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px 2px rgb(222 222 229);
   transition: 0.2s;
 
   &:hover {
     transform: translateY(-0.3em);
-    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 8px 4px rgb(222 222 229);
   }
 `;
 
@@ -67,10 +67,11 @@ export const Image = styled.div`
 
 export const Name = styled.h3`
   width: 90%;
+  height: 2.4em;
   font-weight: 500;
-  font-size: clamp(0.3em, 0.5em + 2vw, 1.1em);
-  line-height: 1.1em;
-  color: var(--text-primary);
+  font-size: clamp(0.3em, 0.5em + 2vw, 1.2em);
+  line-height: 1.2em;
+  color: var(--text-product-name);
   margin-bottom: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,7 +82,7 @@ export const Name = styled.h3`
 
 export const Price = styled.h4`
   width: 100%;
-  font-size: clamp(0.3em, 0.5em + 2vw, 1.1em);
+  font-size: clamp(0.3em, 0.5em + 2vw, 1.2em);
   font-weight: 500;
   text-align: right;
   color: var(--text-primary);

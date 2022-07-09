@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { SubmitButton } from "../assets/styles/authStyles";
 
-export default function AddToCartButton({ productId }) {
+export default function AddToCartButton({ productId, reloadProductInfo }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [requisitionStatus, setRequisitionStatus] = useState(null);
 
@@ -28,6 +28,7 @@ export default function AddToCartButton({ productId }) {
       .then(() => {
         setIsAddingToCart(false);
         setRequisitionStatus("success");
+        reloadProductInfo();
       })
       .catch((err) => {
         setIsAddingToCart(false);

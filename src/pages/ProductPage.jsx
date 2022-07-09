@@ -19,7 +19,7 @@ export default function ProductPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  function getProduct() {
     const URL = `http://localhost:5000/product/${productId}`;
 
     const promise = axios.get(URL);
@@ -32,11 +32,16 @@ export default function ProductPage() {
         console.log(err.response);
         navigate("/");
       });
-  }, []);
+  }
+
+  useEffect(() => getProduct(), []);
 
   function renderProductStock() {
     if (productData) {
-      const stock = productData.initialStock - productData.numberOfPurchases;
+      const stock =
+        productData.initialStock -
+        productData.numberOfPurchases -
+        productData.numberOfCarts;
       return (
         <ProductOnStock
           color={stock <= 5 ? "var(--text-error)" : "var(--text-ok)"}
@@ -95,9 +100,11 @@ export default function ProductPage() {
         <BackButton text="Voltar" />
         <ProductInfoSection>
           <ProductContainer>{productInfo}</ProductContainer>
-          <AddToCartButton type="button" productId={productData?._id}>
-            Adicionar ao carrinho
-          </AddToCartButton>
+          <AddToCartButton
+            type="button"
+            productId={productData?._id}
+            reloadProductInfo={() => getProduct()}
+          />
           {productDescription}
         </ProductInfoSection>
       </MainContainer>

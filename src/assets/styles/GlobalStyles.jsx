@@ -91,4 +91,8 @@ export const GlobalStyle = createGlobalStyle`
     h1 {
         font-family: 'Righteous', cursive;
     }
+
+    strong {
+        font-weight: 600;
+    }
 `;

@@ -68,6 +68,7 @@ export default function AddToCartButton({ productId }) {
     <>
       <Button
         isLoading={isAddingToCart}
+        disabled={isAddingToCart}
         type="button"
         onClick={() => addProductToCart()}
       >

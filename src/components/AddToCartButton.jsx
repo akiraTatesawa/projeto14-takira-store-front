@@ -8,7 +8,11 @@ import { SubmitButton } from "../assets/styles/authStyles";
 
 import { UserContext } from "../contexts/UserContext";
 
-export default function AddToCartButton({ productId, reloadProductInfo }) {
+export default function AddToCartButton({
+  productId,
+  reloadProductInfo,
+  productStock,
+}) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [requisitionStatus, setRequisitionStatus] = useState(null);
   const { userDatas } = useContext(UserContext);
@@ -77,7 +81,7 @@ export default function AddToCartButton({ productId, reloadProductInfo }) {
     <>
       <Button
         isLoading={isAddingToCart}
-        disabled={isAddingToCart}
+        disabled={isAddingToCart || productStock <= 0}
         type="button"
         onClick={() => addProductToCart()}
       >

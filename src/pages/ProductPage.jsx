@@ -17,6 +17,7 @@ import {
 export default function ProductPage() {
   const [productData, setProductData] = useState(null);
   const { productId } = useParams();
+
   const navigate = useNavigate();
 
   function getProduct() {
@@ -47,7 +48,7 @@ export default function ProductPage() {
         <ProductOnStock
           color={stock <= 5 ? "var(--text-error)" : "var(--text-ok)"}
         >
-          Em estoque: {`${stock}`}
+          {stock <= 0 ? "Esgotado" : `Em estoque: ${stock}`}
         </ProductOnStock>
       );
     }
@@ -94,6 +95,19 @@ export default function ProductPage() {
 
   const productDescription = renderProductDescription();
 
+  function calcProductStock() {
+    if (productStock) {
+      return (
+        productData.initialStock -
+        productData.numberOfPurchases -
+        productData.numberOfCarts
+      );
+    }
+    return null;
+  }
+
+  const stock = calcProductStock();
+
   return (
     <>
       <NavBar />
@@ -104,6 +118,7 @@ export default function ProductPage() {
           <AddToCartButton
             type="button"
             productId={productData?._id}
+            productStock={stock}
             reloadProductInfo={() => getProduct()}
           />
           {productDescription}

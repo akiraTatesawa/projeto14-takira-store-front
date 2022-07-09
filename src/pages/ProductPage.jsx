@@ -4,9 +4,9 @@ import axios from "axios";
 
 import NavBar from "../components/NavBar";
 import BackButton from "../components/BackButton";
+import AddToCartButton from "../components/AddToCartButton";
 
 import {
-  AddToCartButton,
   MainContainer,
   ProductContainer,
   ProductDescription,
@@ -95,7 +95,9 @@ export default function ProductPage() {
         <BackButton text="Voltar" />
         <ProductInfoSection>
           <ProductContainer>{productInfo}</ProductContainer>
-          <AddToCartButton type="button">Adicionar ao carrinho</AddToCartButton>
+          <AddToCartButton type="button" productId={productData?._id}>
+            Adicionar ao carrinho
+          </AddToCartButton>
           {productDescription}
         </ProductInfoSection>
       </MainContainer>

@@ -25,6 +25,7 @@
         "import/no-unresolved": "error",
         "no-console": "off",
         "no-alert": "off",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }]
     }
 }

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SubmitButton } from "./authStyles";
 
 export const MainContainer = styled.main`
   width: 100%;
@@ -49,10 +48,12 @@ export const ProductContainer = styled.div`
       }
 
       & div {
-        margin-top: 2.5em;
+        margin-top: 1.5em;
+        height: 2.5em;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
 
       & span {
@@ -75,18 +76,6 @@ export const ProductContainer = styled.div`
       }
     }
   }
-`;
-
-export const AddToCartButton = styled(SubmitButton)`
-  font-size: 1.3em;
-  width: 80%;
-  max-width: 280px;
-  margin-top: 0;
-  margin-top: 2em;
-  min-height: 2.3em;
-  height: auto;
-  line-height: 1.4em;
-  padding: 9px;
 `;
 
 export const ProductOnStock = styled.span`

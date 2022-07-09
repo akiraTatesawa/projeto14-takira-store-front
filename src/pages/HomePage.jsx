@@ -7,9 +7,9 @@ import {
   MainContainer,
   HomeContent,
   SubTitle,
-} from "../assets/styles/homeStyles";
+} from "../assets/styles/homePageStyles";
 
-function HomePage() {
+export default function HomePage() {
   return (
     <>
       <NavBar />
@@ -22,5 +22,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;

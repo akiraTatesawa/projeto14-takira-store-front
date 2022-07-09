@@ -26,7 +26,11 @@ function NavBar() {
         onClick={() => setIsExpanded(true)}
       />
       <Title onClick={() => navigate("/home")}>TAKIRA</Title>
-      <MdShoppingCart size={30} style={{ color: "#ffffff" }} />
+      <MdShoppingCart
+        size={30}
+        style={{ color: "#ffffff" }}
+        onClick={() => navigate("/shopping-cart")}
+      />
     </NavBarContainer>
   );
 }

@@ -24,7 +24,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     const { token } = userDatas;
-    const URL = `http://localhost:5000/products/${categoryId}`;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/products/${categoryId}`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

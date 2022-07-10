@@ -41,7 +41,7 @@ export default function CategoriesSlider() {
 
   useEffect(() => {
     const { token } = userDatas;
-    const URL = "http://localhost:5000/categories";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/categories`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

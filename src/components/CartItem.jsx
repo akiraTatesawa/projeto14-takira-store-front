@@ -26,7 +26,7 @@ export default function CartItem({ id }) {
 
   function handleOnClickTrash() {
     const { token } = userDatas;
-    const URL = `http://localhost:5000/shopping-cart/${id}`;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/shopping-cart/${id}`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

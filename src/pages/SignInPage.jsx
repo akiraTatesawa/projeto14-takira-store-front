@@ -50,7 +50,7 @@ export default function SignInPage() {
   }
 
   function submitUserData(e) {
-    const URL = "http://localhost:5000/sign-in";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/sign-in`;
     e.preventDefault();
     setIsLoading(true);
 

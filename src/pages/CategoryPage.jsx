@@ -38,7 +38,8 @@ export default function CategoryPage() {
       orderedProducts = productsList;
     }
     setProducts(orderedProducts);
-    
+  }
+
   function handleGetCategoryError(err) {
     const { status } = err.response;
     console.log(err.response);

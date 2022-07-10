@@ -19,6 +19,18 @@ export default function AddToCartButton({
 
   const navigate = useNavigate();
 
+  function handleAddToCartError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      setIsAddingToCart(false);
+      setRequisitionStatus("error");
+    }
+  }
+
   function addProductToCart() {
     setIsAddingToCart(true);
     const URL = `${process.env.REACT_APP_API_BASE_URL}/carts/add-product`;
@@ -38,15 +50,7 @@ export default function AddToCartButton({
         setRequisitionStatus("success");
         reloadProductInfo();
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          localStorage.removeItem("userDatas");
-          navigate("/");
-        }
-        setIsAddingToCart(false);
-        setRequisitionStatus("error");
-        console.log(err.response);
-      });
+      .catch(handleAddToCartError);
   }
 
   function renderButtonContent() {

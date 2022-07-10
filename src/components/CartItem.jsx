@@ -24,6 +24,17 @@ export default function CartItem({ id }) {
     setCartItem(cartItems.find((item) => item._id === id));
   }, []);
 
+  function handleDeleteCartItemError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/home");
+    }
+  }
+
   function handleOnClickTrash() {
     const { token } = userDatas;
     const URL = `${process.env.REACT_APP_API_BASE_URL}/shopping-cart/${id}`;
@@ -36,10 +47,7 @@ export default function CartItem({ id }) {
     const promise = axios.delete(URL, config);
     promise
       .then(() => setCartItems(cartItems.filter((item) => item._id !== id)))
-      .catch((err) => {
-        console.log(err.response);
-        navigate("/");
-      });
+      .catch(handleDeleteCartItemError);
   }
 
   function renderCartItem() {

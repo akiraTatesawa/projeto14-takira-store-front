@@ -38,6 +38,16 @@ export default function CategoryPage() {
       orderedProducts = productsList;
     }
     setProducts(orderedProducts);
+    
+  function handleGetCategoryError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/home");
+    }
   }
 
   useEffect(() => {
@@ -52,10 +62,7 @@ export default function CategoryPage() {
     const promise = axios.get(URL, config);
     promise
       .then((response) => orderProducts(response.data))
-      .catch((err) => {
-        console.log(err.response);
-        navigate(-1);
-      });
+      .catch(handleGetCategoryError);
   }, [orderBy]);
 
   function handleOnClick(productId) {

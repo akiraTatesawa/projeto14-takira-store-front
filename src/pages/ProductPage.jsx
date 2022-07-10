@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -13,27 +13,42 @@ import {
   ProductInfoSection,
   ProductOnStock,
 } from "../assets/styles/productPageStyles";
+import { UserContext } from "../contexts/UserContext";
 
 export default function ProductPage() {
   const [productData, setProductData] = useState(null);
+  const { userDatas } = useContext(UserContext);
   const { productId } = useParams();
 
   const navigate = useNavigate();
 
-  function getProduct() {
-    const URL = `${process.env.REACT_APP_API_BASE_URL}/product/${productId}`;
+  function handleGetProductError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/home");
+    }
+  }
 
-    const promise = axios.get(URL);
+  function getProduct() {
+    const { token } = userDatas;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/product/${productId}`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promise = axios.get(URL, config);
 
     promise
       .then((response) => {
         setProductData(response.data);
       })
-      .catch((err) => {
-        console.log(err.response);
-        localStorage.removeItem("userDatas");
-        navigate("/");
-      });
+      .catch(handleGetProductError);
   }
 
   useEffect(() => getProduct(), []);

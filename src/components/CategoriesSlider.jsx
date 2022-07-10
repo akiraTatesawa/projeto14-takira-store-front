@@ -29,14 +29,9 @@ export default function CategoriesSlider() {
   const navigate = useNavigate();
 
   function handleError(err) {
-    const { status } = err.response;
     console.log(err.response);
-
-    if (status === 422) {
-      alert("Não autorizado!");
-    } else {
-      alert("Houve um erro ao obter as categorias, faça login novamente!");
-    }
+    localStorage.removeItem("userDatas");
+    navigate("/");
   }
 
   useEffect(() => {

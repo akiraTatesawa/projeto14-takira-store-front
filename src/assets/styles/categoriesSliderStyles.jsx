@@ -6,6 +6,7 @@ export const Slider = styled.ul`
   align-items: flex-start;
   justify-content: flex-start;
   overflow-x: scroll;
+  margin-bottom: 4em;
 
   &::-webkit-scrollbar {
     display: none;

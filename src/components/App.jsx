@@ -7,11 +7,11 @@ import HomePage from "../pages/HomePage";
 import CategoryPage from "../pages/CategoryPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 import { UserContext } from "../contexts/UserContext";
-import CategoryContext from "../contexts/CategoryContext";
-import CartContext from "../contexts/CartContext";
-import CheckoutPage from "../pages/CheckoutPage";
+import { CategoryContext } from "../contexts/CategoryContext";
+import { CartContext } from "../contexts/CartContext";
 
 function App() {
   const [categoryName, setCategoryName] = useState("");

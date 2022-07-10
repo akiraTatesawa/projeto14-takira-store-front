@@ -7,11 +7,13 @@ import Menu from "./Menu";
 import { NavBarContainer, Title } from "../assets/styles/navBarStyles";
 
 function NavBar() {
-  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   function renderSideMenu() {
-    if (isExpanded) return <Menu />;
+    if (isExpanded) {
+      return <Menu />;
+    }
     return null;
   }
 
@@ -20,15 +22,11 @@ function NavBar() {
   return (
     <NavBarContainer>
       {sideMenu}
-      <MdMenu
-        size={30}
-        style={{ color: "#ffffff" }}
-        onClick={() => setIsExpanded(true)}
-      />
+      <MdMenu size={30} color="#ffffff" onClick={() => setIsExpanded(true)} />
       <Title onClick={() => navigate("/home")}>TAKIRA</Title>
       <MdShoppingCart
         size={30}
-        style={{ color: "#ffffff" }}
+        color="#ffffff"
         onClick={() => navigate("/shopping-cart")}
       />
     </NavBarContainer>

@@ -6,7 +6,7 @@ import CategoriesSlider from "../components/CategoriesSlider";
 import {
   MainContainer,
   HomeContent,
-  SubTitle,
+  Subtitle,
 } from "../assets/styles/homePageStyles";
 
 export default function HomePage() {
@@ -15,7 +15,7 @@ export default function HomePage() {
       <NavBar />
       <MainContainer>
         <HomeContent>
-          <SubTitle>Categorias</SubTitle>
+          <Subtitle>Categorias</Subtitle>
           <CategoriesSlider />
         </HomeContent>
       </MainContainer>

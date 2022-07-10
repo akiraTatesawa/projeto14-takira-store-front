@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Slider = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
+  justify-content: flex-start;
   overflow-x: scroll;
 
   &::-webkit-scrollbar {
@@ -15,15 +15,15 @@ export const Slider = styled.ul`
 export const Category = styled.li`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 5em;
-  margin: 0 0.5em;
+  margin: 0 0.4em;
 `;
 
 export const Circle = styled.div`
-  width: 5em;
-  height: 5em;
+  width: 4.5em;
+  height: 4.5em;
   display: flex;
   align-items: center;
   justify-content: center;

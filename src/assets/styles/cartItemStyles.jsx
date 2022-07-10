@@ -10,14 +10,14 @@ export const ItemContainer = styled.div`
   border-radius: 5px;
   padding: 0.7em;
   margin-bottom: 0.7em;
+`;
 
-  img {
-    width: 20%;
-    aspect-ratio: 1;
-    object-fit: contain;
-    border-radius: 5px;
-    margin-right: 0.7em;
-  }
+export const Image = styled.img`
+  width: 20%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 5px;
+  margin-right: 0.7em;
 `;
 
 export const ItemInfos = styled.div`

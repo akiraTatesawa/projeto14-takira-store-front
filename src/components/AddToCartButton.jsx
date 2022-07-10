@@ -21,7 +21,7 @@ export default function AddToCartButton({
 
   function addProductToCart() {
     setIsAddingToCart(true);
-    const URL = "http://localhost:5000/carts/add-product";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/carts/add-product`;
     const { token } = userDatas;
 
     const config = {

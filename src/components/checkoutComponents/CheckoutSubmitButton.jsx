@@ -28,7 +28,7 @@ export default function CheckoutSubmitButton({
     };
 
     const promise = axios.delete(
-      `http://localhost:5000/checkout/${cartId}`,
+      `${process.env.REACT_APP_API_BASE_URL}/checkout/${cartId}`,
       config
     );
 

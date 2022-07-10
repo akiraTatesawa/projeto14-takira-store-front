@@ -30,7 +30,7 @@ export default function CategoriesSlider() {
   }
 
   useEffect(() => {
-    const URL = "http://localhost:5000/categories";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/categories`;
     const promise = axios.get(URL);
 
     promise

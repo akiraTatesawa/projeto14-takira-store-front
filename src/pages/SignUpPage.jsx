@@ -52,7 +52,7 @@ export default function SignUpPage() {
   }
 
   function submitUserData(e) {
-    const URL = "http://localhost:5000/sign-up";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/sign-up`;
     e.preventDefault();
     setIsLoading(true);
 

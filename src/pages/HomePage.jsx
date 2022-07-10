@@ -2,6 +2,7 @@ import React from "react";
 
 import NavBar from "../components/NavBar";
 import CategoriesSlider from "../components/CategoriesSlider";
+import BestSellers from "../components/BestSellers";
 
 import {
   MainContainer,
@@ -17,6 +18,8 @@ export default function HomePage() {
         <HomeContent>
           <Subtitle>Categorias</Subtitle>
           <CategoriesSlider />
+          <Subtitle>Mais vendidos</Subtitle>
+          <BestSellers />
         </HomeContent>
       </MainContainer>
     </>

@@ -60,6 +60,7 @@ export default function PaymentForm({ isSubmittingPayment }) {
           onChange={(e) => handleChange(e)}
           required
           disabled={isSubmittingPayment}
+          autoComplete="off"
         />
         <input
           value={paymentInfo.creditCardNumber}

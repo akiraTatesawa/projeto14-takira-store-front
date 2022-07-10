@@ -8,6 +8,7 @@ import CategoryPage from "../pages/CategoryPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import ProfilePage from "../pages/ProfilePage";
 
 import { UserContext } from "../contexts/UserContext";
 import { CategoryContext } from "../contexts/CategoryContext";
@@ -49,6 +50,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/categories/:categoryId" element={<CategoryPage />} />
             <Route path="/product/:productId" element={<ProductPage />} />

@@ -5,38 +5,39 @@ import { BsTrashFill } from "react-icons/bs";
 
 import {
   ItemContainer,
+  Image,
   ItemInfos,
   GeneralInfos,
   Actions,
 } from "../assets/styles/cartItemStyles";
 
-import CartContext from "../contexts/CartContext";
+import { UserContext } from "../contexts/UserContext";
+import { CartContext } from "../contexts/CartContext";
 
 export default function CartItem({ id }) {
   const [cartItem, setCartItem] = useState({});
+  const { userDatas } = useContext(UserContext);
   const { cartItems, setCartItems } = useContext(CartContext);
   const navigate = useNavigate();
-
-  const { token } = JSON.parse(localStorage.getItem("userDatas"));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
 
   useEffect(() => {
     setCartItem(cartItems.find((item) => item._id === id));
   }, []);
 
-  function handleOnClick() {
+  function handleOnClickTrash() {
+    const { token } = userDatas;
     const URL = `http://localhost:5000/shopping-cart/${id}`;
-    const promise = axios.delete(URL, config);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
+    const promise = axios.delete(URL, config);
     promise
-      .then(() => {
-        setCartItems(cartItems.filter((item) => item._id !== id));
-      })
-      .catch(() => {
+      .then(() => setCartItems(cartItems.filter((item) => item._id !== id)))
+      .catch((err) => {
+        console.log(err.response);
         navigate("/");
       });
   }
@@ -45,7 +46,12 @@ export default function CartItem({ id }) {
     if (cartItem) {
       return (
         <>
-          <img src={cartItem.image} alt={cartItem.name} title={cartItem.name} />
+          <Image
+            src={cartItem.image}
+            alt={cartItem.name}
+            title={cartItem.name}
+            onClick={() => navigate(`/product/${cartItem._id}`)}
+          />
           <ItemInfos>
             <GeneralInfos>
               <h3>{cartItem.name}</h3>
@@ -55,8 +61,8 @@ export default function CartItem({ id }) {
               <p>Quantidade: {cartItem.quantity}</p>
               <BsTrashFill
                 size={20}
-                style={{ color: "#27272a" }}
-                onClick={() => handleOnClick()}
+                color="#27272a"
+                onClick={() => handleOnClickTrash()}
               />
             </Actions>
           </ItemInfos>

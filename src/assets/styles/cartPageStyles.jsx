@@ -23,10 +23,10 @@ export const CartContent = styled.section`
 export const SubTitle = styled.h2`
   width: 100%;
   text-align: start;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 1.3em;
+  margin-bottom: 1em;
 `;
 
 export const Items = styled.div`
@@ -44,14 +44,14 @@ export const Footer = styled.footer`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 4px -4px 10px #f4f4f5;
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: #ffffff;
-  box-shadow: 4px -4px 10px #f4f4f5;
 
   p {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 500;
     color: var(--text-sec);
   }

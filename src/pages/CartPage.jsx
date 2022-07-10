@@ -14,28 +14,28 @@ import {
   Button,
 } from "../assets/styles/cartPageStyles";
 
-import CartContext from "../contexts/CartContext";
+import { UserContext } from "../contexts/UserContext";
+import { CartContext } from "../contexts/CartContext";
 
 export default function CartPage() {
+  const { userDatas } = useContext(UserContext);
   const { cartItems, setCartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
-  const { token } = JSON.parse(localStorage.getItem("userDatas"));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
   useEffect(() => {
+    const { token } = userDatas;
     const URL = "http://localhost:5000/shopping-cart";
-    const promise = axios.get(URL, config);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
+    const promise = axios.get(URL, config);
     promise
-      .then((response) => {
-        setCartItems(response.data);
-      })
-      .catch(() => {
+      .then((res) => setCartItems(res.data))
+      .catch((err) => {
+        console.log(err.response);
         navigate("/");
       });
   }, []);

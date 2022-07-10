@@ -18,10 +18,10 @@ export const HomeContent = styled.section`
   margin-top: 59px;
 `;
 
-export const SubTitle = styled.h2`
+export const Subtitle = styled.h2`
   width: 100%;
   text-align: start;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1em;

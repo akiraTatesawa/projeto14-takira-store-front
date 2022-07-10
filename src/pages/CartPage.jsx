@@ -22,6 +22,12 @@ export default function CartPage() {
   const { cartItems, setCartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
+  function handleError(err) {
+    console.log(err.response);
+    localStorage.removeItem("userDatas");
+    navigate("/");
+  }
+
   useEffect(() => {
     const { token } = userDatas;
     const URL = `${process.env.REACT_APP_API_BASE_URL}/shopping-cart`;
@@ -32,12 +38,7 @@ export default function CartPage() {
     };
 
     const promise = axios.get(URL, config);
-    promise
-      .then((res) => setCartItems(res.data))
-      .catch((err) => {
-        console.log(err.response);
-        navigate("/");
-      });
+    promise.then((res) => setCartItems(res.data)).catch(handleError);
   }, []);
 
   function renderItems() {

@@ -17,6 +17,17 @@ export default function CheckoutSubmitButton({
 
   const navigate = useNavigate();
 
+  function handleFinishOrderError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/shopping-cart");
+    }
+  }
+
   function finishOrder() {
     setIsSubmittingPayment(true);
     const { cartId } = checkoutData;
@@ -32,9 +43,7 @@ export default function CheckoutSubmitButton({
       config
     );
 
-    promise
-      .then(() => navigate("/home"))
-      .catch((err) => console.log(err.response));
+    promise.then(() => navigate("/home")).catch(handleFinishOrderError);
   }
 
   function renderButtonContent() {

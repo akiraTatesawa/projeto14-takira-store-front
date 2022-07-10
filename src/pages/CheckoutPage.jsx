@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   CheckoutMain,
@@ -26,6 +27,18 @@ export default function CheckoutPage() {
   });
 
   const { userDatas } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function handleGetCheckoutError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/shopping-cart");
+    }
+  }
 
   useEffect(() => {
     const { token, name } = userDatas;
@@ -39,7 +52,7 @@ export default function CheckoutPage() {
     const promise = axios.get(URL, config);
     promise
       .then((res) => setCheckoutData({ ...res.data, name }))
-      .catch((err) => console.log(err.response));
+      .catch(handleGetCheckoutError);
   }, []);
 
   function renderCheckoutSection() {

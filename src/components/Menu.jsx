@@ -1,18 +1,134 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { blueGrey } from "@mui/material/colors";
+import { MdMenu } from "react-icons/md";
+import { BsPersonCircle } from "react-icons/bs";
+
+import { UserContext } from "../contexts/UserContext";
+import { CategoryContext } from "../contexts/CategoryContext";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Inter",
+    fontSize: 14,
+  },
+  palette: {
+    primary: blueGrey,
+  },
+});
 
 export default function Menu() {
-  return <MenuContainer>Eu sou a SideBar</MenuContainer>;
-}
+  const { userDatas } = useContext(UserContext);
+  const { setCategoryName } = useContext(CategoryContext);
+  const [state, setState] = useState({
+    left: false,
+  });
+  const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
-const MenuContainer = styled.div`
-  display: flex;
-  width: 60%;
-  height: 100%;
-  max-width: 15em;
-  background: var(--brand-sec);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-`;
+  function handleError(err) {
+    console.log(err.response);
+    localStorage.removeItem("userDatas");
+    navigate("/");
+  }
+
+  useEffect(() => {
+    const { token } = userDatas;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/categories`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promise = axios.get(URL, config);
+    promise
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch(handleError);
+  }, []);
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ [anchor]: open });
+  };
+
+  const handleOnClick = (category) => {
+    setCategoryName(category.name);
+    navigate(`/categories/${category._id}`);
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <BsPersonCircle size={40} color="#30475E" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary={userDatas.name} />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        {categories.map((category) => (
+          <ListItem key={category.name} disablePadding>
+            <ListItemButton>
+              <ListItemText
+                primary={category.name}
+                onClick={() => handleOnClick(category)}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+        <Divider />
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary="Sair" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div>
+        <React.Fragment key="left">
+          <Button onClick={toggleDrawer("left", true)}>
+            <MdMenu size={30} color="#ffffff" />
+          </Button>
+          <Drawer
+            anchor="left"
+            open={state.left}
+            onClose={toggleDrawer("left", false)}
+          >
+            {list("left")}
+          </Drawer>
+        </React.Fragment>
+      </div>
+    </ThemeProvider>
+  );
+}

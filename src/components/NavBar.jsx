@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MdMenu, MdShoppingCart } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 
 import Menu from "./Menu";
 
 import { NavBarContainer, Title } from "../assets/styles/navBarStyles";
 
 function NavBar() {
-  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
-
-  function renderSideMenu() {
-    if (isExpanded) {
-      return <Menu />;
-    }
-    return null;
-  }
-
-  const sideMenu = renderSideMenu();
 
   return (
     <NavBarContainer>
-      {sideMenu}
-      <MdMenu size={30} color="#ffffff" onClick={() => setIsExpanded(true)} />
+      <Menu />
       <Title onClick={() => navigate("/home")}>TAKIRA</Title>
       <MdShoppingCart
         size={30}

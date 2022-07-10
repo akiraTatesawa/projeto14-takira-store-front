@@ -64,7 +64,7 @@ export default function CategoryPage() {
     promise
       .then((response) => orderProducts(response.data))
       .catch(handleGetCategoryError);
-  }, [orderBy]);
+  }, [orderBy, categoryId]);
 
   function handleOnClick(productId) {
     navigate(`/product/${productId}`);

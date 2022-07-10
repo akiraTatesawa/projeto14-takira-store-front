@@ -22,6 +22,17 @@ export default function CategoryPage() {
   const { categoryName } = useContext(CategoryContext);
   const navigate = useNavigate();
 
+  function handleGetCategoryError(err) {
+    const { status } = err.response;
+    console.log(err.response);
+    if (status === 401) {
+      localStorage.removeItem("userDatas");
+      navigate("/");
+    } else {
+      navigate("/home");
+    }
+  }
+
   useEffect(() => {
     const { token } = userDatas;
     const URL = `${process.env.REACT_APP_API_BASE_URL}/products/${categoryId}`;
@@ -34,10 +45,7 @@ export default function CategoryPage() {
     const promise = axios.get(URL, config);
     promise
       .then((response) => setProducts(response.data))
-      .catch((err) => {
-        console.log(err.response);
-        navigate(-1);
-      });
+      .catch(handleGetCategoryError);
   }, []);
 
   function handleOnClick(productId) {

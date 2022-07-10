@@ -16,8 +16,6 @@ export default function BestSellers() {
     if (status === 401) {
       localStorage.removeItem("userDatas");
       navigate("/");
-    } else {
-      navigate("/home");
     }
   }
 

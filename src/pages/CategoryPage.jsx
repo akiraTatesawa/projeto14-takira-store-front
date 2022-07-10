@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import NavBar from "../components/NavBar";
+import SelectSmall from "../components/SelectSmall";
 
 import { UserContext } from "../contexts/UserContext";
 import { CategoryContext } from "../contexts/CategoryContext";
@@ -17,10 +18,27 @@ import {
 
 export default function CategoryPage() {
   const [products, setProducts] = useState([]);
+  const [orderBy, setOrderBy] = useState("");
   const { categoryId } = useParams();
   const { userDatas } = useContext(UserContext);
   const { categoryName } = useContext(CategoryContext);
   const navigate = useNavigate();
+
+  function orderProducts(productsList) {
+    let orderedProducts;
+    if (orderBy === 10) {
+      orderedProducts = productsList.sort((a, b) => a.price - b.price);
+    } else if (orderBy === 20) {
+      orderedProducts = productsList.sort((a, b) => b.price - a.price);
+    } else if (orderBy === 30) {
+      orderedProducts = productsList.sort(
+        (a, b) => b.numberOfPurchases - a.numberOfPurchases
+      );
+    } else {
+      orderedProducts = productsList;
+    }
+    setProducts(orderedProducts);
+  }
 
   useEffect(() => {
     const { token } = userDatas;
@@ -33,12 +51,12 @@ export default function CategoryPage() {
 
     const promise = axios.get(URL, config);
     promise
-      .then((response) => setProducts(response.data))
+      .then((response) => orderProducts(response.data))
       .catch((err) => {
         console.log(err.response);
         navigate(-1);
       });
-  }, []);
+  }, [orderBy]);
 
   function handleOnClick(productId) {
     navigate(`/product/${productId}`);
@@ -65,6 +83,7 @@ export default function CategoryPage() {
       <MainContainer>
         <ProductsContent>
           <SubTitle>{categoryName}</SubTitle>
+          <SelectSmall orderBy={orderBy} setOrderBy={setOrderBy} />
           <Products>{productsContent}</Products>
         </ProductsContent>
       </MainContainer>

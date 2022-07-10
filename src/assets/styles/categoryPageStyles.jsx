@@ -23,7 +23,6 @@ export const SubTitle = styled.h2`
   font-size: 1.3em;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 1em;
 `;
 
 export const Products = styled.div`

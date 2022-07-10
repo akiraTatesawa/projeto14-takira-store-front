@@ -21,7 +21,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
 
   function getProduct() {
-    const URL = `http://localhost:5000/product/${productId}`;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/product/${productId}`;
 
     const promise = axios.get(URL);
 

@@ -29,7 +29,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     const { token, name } = userDatas;
-    const URL = "http://localhost:5000/carts";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/carts`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

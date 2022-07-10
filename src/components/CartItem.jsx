@@ -29,7 +29,7 @@ export default function CartItem({ id }) {
   }, []);
 
   function handleOnClick() {
-    const URL = `http://localhost:5000/shopping-cart/${id}`;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/shopping-cart/${id}`;
     const promise = axios.delete(URL, config);
 
     promise

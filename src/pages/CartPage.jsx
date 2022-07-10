@@ -28,7 +28,7 @@ export default function CartPage() {
   };
 
   useEffect(() => {
-    const URL = "http://localhost:5000/shopping-cart";
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/shopping-cart`;
     const promise = axios.get(URL, config);
 
     promise

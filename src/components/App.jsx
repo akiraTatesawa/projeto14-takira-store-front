@@ -12,6 +12,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import { UserContext } from "../contexts/UserContext";
 import { CategoryContext } from "../contexts/CategoryContext";
 import { CartContext } from "../contexts/CartContext";
+import UserPage from "../pages/UserPage";
 
 function App() {
   const [categoryName, setCategoryName] = useState("");
@@ -49,6 +50,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/profile" element={<UserPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/categories/:categoryId" element={<CategoryPage />} />
             <Route path="/product/:productId" element={<ProductPage />} />

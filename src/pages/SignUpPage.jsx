@@ -105,6 +105,7 @@ export default function SignUpPage() {
             required
             disabled={isLoading}
             onChange={(e) => handleChange(e)}
+            autoComplete="off"
           />
           <Input
             type="email"
@@ -115,6 +116,7 @@ export default function SignUpPage() {
             required
             disabled={isLoading}
             onChange={(e) => handleChange(e)}
+            autoComplete="off"
           />
           <Input
             type="password"

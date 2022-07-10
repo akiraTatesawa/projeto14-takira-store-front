@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -12,7 +13,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blueGrey } from "@mui/material/colors";
 import { MdMenu } from "react-icons/md";
-import { BsPersonCircle } from "react-icons/bs";
 
 import { UserContext } from "../contexts/UserContext";
 import { CategoryContext } from "../contexts/CategoryContext";
@@ -84,12 +84,25 @@ export default function Menu() {
       <List>
         <ListItem disablePadding>
           <ListItemButton>
-            <BsPersonCircle size={40} color="#30475E" />
+            <Avatar
+              sx={{
+                bgcolor: "#64849E",
+                width: "1.5em",
+                height: "1.5em",
+                fontSize: "2em",
+              }}
+              onClick={() => navigate("/profile")}
+            >
+              {userDatas.name.charAt(0)}
+            </Avatar>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText primary={userDatas.name} />
+            <ListItemText
+              primary={userDatas.name}
+              onClick={() => navigate("/profile")}
+            />
           </ListItemButton>
         </ListItem>
         <Divider />

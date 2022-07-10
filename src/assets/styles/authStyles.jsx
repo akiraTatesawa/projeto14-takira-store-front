@@ -43,6 +43,7 @@ export const AuthContent = styled.section`
 `;
 
 export const Input = styled.input`
+  font-size: 1.2em;
   height: 3em;
   width: 100%;
   max-width: 350px;
@@ -62,7 +63,7 @@ export const SubmitButton = styled.button`
   justify-content: center;
   width: 100%;
   max-width: 350px;
-  height: 2em;
+  height: 2.3em;
   background-color: var(--brand-sec);
   font-size: 1.43em;
   font-weight: 600;

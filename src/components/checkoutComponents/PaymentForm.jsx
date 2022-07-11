@@ -42,7 +42,11 @@ export default function PaymentForm({ isSubmittingPayment }) {
     if (name === "name") {
       setPaymentInfo({
         ...paymentInfo,
-        [name]: value.toUpperCase().replace(/\d/g, "").replace(/\W/, ""),
+        [name]: value
+          .toUpperCase()
+          .replace(/\d/g, "")
+          .replace(/\W /, "")
+          .replace(/^ /, ""),
       });
     }
   }

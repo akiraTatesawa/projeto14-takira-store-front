@@ -59,6 +59,29 @@ export default function Menu() {
       .catch(handleError);
   }, []);
 
+  function signOut() {
+    const { token } = userDatas;
+    const URL = `${process.env.REACT_APP_API_BASE_URL}/sign-out`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promise = axios.delete(URL, config);
+
+    promise
+      .then(() => {
+        localStorage.removeItem("userDatas");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        localStorage.removeItem("userDatas");
+        navigate("/");
+      });
+  }
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -119,7 +142,7 @@ export default function Menu() {
         <Divider />
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText primary="Sair" />
+            <ListItemText primary="Sair" onClick={() => signOut()} />
           </ListItemButton>
         </ListItem>
       </List>

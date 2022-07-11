@@ -24,7 +24,7 @@ export default function SelectSmall({ orderBy, setOrderBy }) {
   return (
     <ThemeProvider theme={theme}>
       <FormControl sx={{ m: 1.5, minWidth: 140 }} size="small">
-        <InputLabel id="demo-select-small">Ordernar por</InputLabel>
+        <InputLabel id="demo-select-small">Ordenar por</InputLabel>
         <Select
           labelId="demo-select-small"
           id="demo-select-small"
@@ -37,7 +37,7 @@ export default function SelectSmall({ orderBy, setOrderBy }) {
           </MenuItem>
           <MenuItem value={10}>Menor preço</MenuItem>
           <MenuItem value={20}>Maior preço</MenuItem>
-          <MenuItem value={30}>Mais vendidos</MenuItem>
+          <MenuItem value={30}>Mais vendido</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>

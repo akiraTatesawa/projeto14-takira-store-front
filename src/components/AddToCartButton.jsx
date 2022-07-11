@@ -97,6 +97,7 @@ export default function AddToCartButton({
 }
 
 const Button = styled(SubmitButton)`
+  font-family: "Inter", sans-serif;
   font-size: 1.3em;
   width: 80%;
   max-width: 280px;

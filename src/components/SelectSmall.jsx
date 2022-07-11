@@ -37,7 +37,7 @@ export default function SelectSmall({ orderBy, setOrderBy }) {
           </MenuItem>
           <MenuItem value={10}>Menor preço</MenuItem>
           <MenuItem value={20}>Maior preço</MenuItem>
-          <MenuItem value={30}>Mais comprados</MenuItem>
+          <MenuItem value={30}>Mais vendidos</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>

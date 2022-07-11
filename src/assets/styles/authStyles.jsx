@@ -43,6 +43,7 @@ export const AuthContent = styled.section`
 `;
 
 export const Input = styled.input`
+  font-family: "Inter", sans-serif;
   font-size: 1.2em;
   height: 3em;
   width: 100%;
@@ -58,6 +59,7 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;

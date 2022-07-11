@@ -39,6 +39,7 @@ export const Form = styled.form`
   gap: 0.5em;
 
   & input[type="text"] {
+    font-family: "Inter", sans-serif;
     font-size: 1em;
     line-height: 1.5em;
     height: 3em;
@@ -66,6 +67,7 @@ export const FormSelectContainer = styled.div`
   gap: 0.5em;
 
   & select {
+    font-family: "Inter", sans-serif;
     color: var(--text-sec);
     padding: 0.7em;
     width: 100%;

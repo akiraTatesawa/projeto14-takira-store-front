@@ -15,6 +15,7 @@ export default function BackButton({ text }) {
 }
 
 const Button = styled.button`
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -4,6 +4,8 @@ import NavBar from "../components/NavBar";
 import CategoriesSlider from "../components/CategoriesSlider";
 import BestSellers from "../components/BestSellers";
 
+import Banner from "../assets/images/banner.png";
+
 import {
   MainContainer,
   HomeContent,
@@ -16,6 +18,7 @@ export default function HomePage() {
       <NavBar />
       <MainContainer>
         <HomeContent>
+          <img src={Banner} alt="Banner" />
           <Subtitle>Categorias</Subtitle>
           <CategoriesSlider />
           <Subtitle>Mais vendidos</Subtitle>

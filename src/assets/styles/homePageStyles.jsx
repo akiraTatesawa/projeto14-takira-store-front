@@ -16,6 +16,12 @@ export const HomeContent = styled.section`
   align-items: center;
   justify-content: center;
   margin-top: 59px;
+
+  img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 2em;
+  }
 `;
 
 export const Subtitle = styled.h2`
